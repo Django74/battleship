@@ -7,7 +7,8 @@ class Square extends Component {
 
   render() {
     return (
-        <button className="square" onClick={() => {}}></button>
+      <button className="square" onClick={() => {
+      }}></button>
     );
   }
 }

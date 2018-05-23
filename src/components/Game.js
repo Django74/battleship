@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Board from './Board';
+import Statistics from './Statistics';
 
 class Game extends Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class Game extends Component {
 
   render() {
     return (
-        <div className="game-dashboard">
-          <Board className="player-board" size={this.size}/>
-          <Board className="opponent-board" size={this.size}/>
-        </div>
+      <div className="game-dashboard">
+        <Board className="player-board" size={this.size} isPlayer={true}/>
+        <Board className="opponent-board" size={this.size} isPlayer={false}/>
+        <Statistics/>
+      </div>
     );
+
   }
 }
 

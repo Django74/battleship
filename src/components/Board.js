@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   renderGrid() {
@@ -15,7 +13,7 @@ class Board extends Component {
     let size = this.props.size;
     for (let row = 0; row < size; row++) {
       grid.push(<div className="board-row"/>);
-      for (let col = 0; col < size; col ++) {
+      for (let col = 0; col < size; col++) {
         grid.push(<Square/>);
       }
     }
@@ -26,7 +24,7 @@ class Board extends Component {
     const grid = this.renderGrid();
     return (
       <div>
-        <h1>Player</h1>
+        <h1>{this.props.isPlayer ? 'Player' : 'Opponent'}</h1>
         {grid}
       </div>
     );
@@ -34,7 +32,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  size: PropTypes.number
+  size: PropTypes.number,
+  isPlayer: PropTypes.bool,
 };
 
 export default Board;
