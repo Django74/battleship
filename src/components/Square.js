@@ -7,9 +7,7 @@ class Square extends Component {
 
   render() {
     return (
-        <div>
-
-        </div>
+        <button className="square" onClick={() => {}}></button>
     );
   }
 }
