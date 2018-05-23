@@ -11,6 +11,9 @@ class Statistics extends Component {
     return (
       <div>
         <h1>Your info</h1>
+        <h3>Ships Sunk:</h3>
+        <button>Start</button>
+        <button>Reset</button>
       </div>
     );
   }
