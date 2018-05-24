@@ -13,8 +13,8 @@ class Game extends Component {
     this.state={
       turn: 0,
       ships: [generateShips(this.size), generateShips(this.size)],
-      playerOneHp: 16,
-      playerTwoHp: 16,
+      playersHealth: [16,16],
+      playersShipHit: [{},{}],
     };
 
     this.changeTurn = this.changeTurn.bind(this);
@@ -27,9 +27,8 @@ class Game extends Component {
 
   handleAttack(x, y) {
     const coord = `(${x},${y})`;
-    if (this.ships[this.getOppositeTurn()][coord]) {
-      console.log(x);
-      console.log(y);
+    if (this.state.ships[this.getOppositeTurn()][coord]) {
+      console.log(`(${x},${y})`);
     }
   }
 

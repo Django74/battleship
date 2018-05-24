@@ -27,7 +27,7 @@ class Board extends Component {
                           xCoord={x}
                           yCoord={y}
                           type={this.props.type}
-                          handleAttack={this.handleAttack}
+                          handleAttack={this.props.handleAttack}
                           ships={this.props.ships[this.props.turn]}
                           coord={coord}
         />);
