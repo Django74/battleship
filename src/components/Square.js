@@ -15,11 +15,11 @@ class Square extends Component {
     let isMiss = false;
 
     if (this.props.type === 'player') {
-      let playerNumber = this.props.turn === 0 ? 1 : 0;
+      let playerNumber = this.props.turn;
       isHit = this.props.playersShipHit[playerNumber][this.coord];
       isShip = this.props.ships[this.coord];
     } else {
-      let playerNumber = this.props.turn === 0 ? 0 : 1;
+      let playerNumber = this.props.turn === 0 ? 1 : 0;
       isHit = this.props.playersShipHit[playerNumber][this.coord];
       isMiss = this.props.playerMisses[playerNumber][this.coord];
     }
@@ -35,6 +35,7 @@ class Square extends Component {
       'square': true,
       'ship': isShip,
       'hit': isHit,
+      'miss': isMiss,
     };
 
     return (

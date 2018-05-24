@@ -23,6 +23,12 @@ class Game extends Component {
     this.handleAttack = this.handleAttack.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.state.playersHealth[0] === 0 || this.state.playersHealth[1] === 0) {
+      alert(`Player: ${this.state.turn + 1} WON`);
+    }
+  }
+
   changeTurn() {
     if(window.confirm("Are you sure you want to change turns?")) {
       this.setState({
@@ -33,23 +39,20 @@ class Game extends Component {
   }
 
   handleAttack(coord) {
-    let newHealth = this.state.playersHealth;
-    let newHits = this.state.playersShipHit;
-    let newMisses = this.state.playerMisses;
+    let newHealth = [...this.state.playersHealth];
+    let newHits = [...this.state.playersShipHit];
+    let newMisses = [...this.state.playerMisses];
 
     // if hit decrease health and update accordingly
     // else miss
     if (this.state.ships[this.getOppositeTurn()][coord]) {
       // update health
-      newHealth = [...this.state.playersHealth];
       newHealth[this.getOppositeTurn()]--;
 
       // update tracked ships
-      let newHits = [...this.state.playersShipHit];
       newHits[this.getOppositeTurn()][coord] = true;
     } else {
       //update missed ships
-      let newMisses = [...this.state.playerMisses];
       newMisses[this.getOppositeTurn()][coord] = true;
     }
 

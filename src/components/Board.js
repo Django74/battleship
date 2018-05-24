@@ -33,6 +33,7 @@ class Board extends Component {
                           playersShipHit={this.props.playersShipHit}
                           playerMisses={this.props.playerMisses}
                           hitAlready={this.props.hitAlready}
+                          turn={this.props.turn}
         />);
       }
     }
