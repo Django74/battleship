@@ -13,11 +13,11 @@ class Board extends Component {
     let grid = [];
     let size = this.props.size;
     for (let x = 0; x < size; x++) {
-      grid.push(<div className="board-row"/>);
+      grid.push(<div key={`row${x}`} className="board-row"/>);
       for (let y = 0; y < size; y++) {
         const coord = `(${x},${y})`;
         const isShip = !!this.ships[coord];
-        grid.push(<Square isShip={isShip}/>);
+        grid.push(<Square key={coord} isShip={isShip} xCoord={x} yCoord={y}/>);
       }
     }
     return grid;

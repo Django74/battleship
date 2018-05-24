@@ -8,7 +8,7 @@ function generateShips(size) {
   while (toGenerate) {
     const xStart = Math.floor((Math.random() * (size - 1)));
     const yStart = Math.floor((Math.random() * (size - 1)));
-    const randIndex = Math.floor(Math.random() * (directionArray.length - 1));
+    const randIndex = Math.floor(Math.random() * (directionArray.length));
 
     let found = false;
     while (!found) {
@@ -39,14 +39,17 @@ function generateShips(size) {
       const rand = Math.round(Math.random());
       const randomDirection = rand ? direction * -1 : direction;
       // if horizontal piece, add in vertical direction and vice-versa
+      let newAxis;
       if (axis) {
         testArray[0] += randomDirection;
+        newAxis = 0;
       }
       else {
-        testArray[1] += randomDirection
+        testArray[1] += randomDirection;
+        newAxis = 1;
       }
       if (shipCoordinates[`(${testArray[0]},${testArray[1]}`] ||
-        testArray[axis] > size - 1 || testArray[axis] < 0) {
+        testArray[newAxis] > size - 1 || testArray[newAxis] < 0) {
         break;
       } else {
         testCoords[`(${testArray[0]},${testArray[1]})`] = true;

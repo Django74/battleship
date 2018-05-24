@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d83cb95-079e-4c34-9a00-0ceaf088e9d4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Board.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Board.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Square.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Square.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/helper.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,10 +20,22 @@
           <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/helper.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+                <state relative-caret-position="508">
+                  <caret line="55" column="21" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="21" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret selection-end-line="8" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -49,8 +56,8 @@
           <file leaf-file-name="Board.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Board.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+                <state relative-caret-position="238">
+                  <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#39#0" expanded="true" />
                   </folding>
@@ -134,8 +141,8 @@
         <option value="$PROJECT_DIR$/src/components/test.html" />
         <option value="$PROJECT_DIR$/src/Game.css" />
         <option value="$PROJECT_DIR$/src/components/Square.js" />
-        <option value="$PROJECT_DIR$/src/components/Board.js" />
         <option value="$PROJECT_DIR$/src/components/Game.js" />
+        <option value="$PROJECT_DIR$/src/components/Board.js" />
         <option value="$PROJECT_DIR$/src/components/helper.js" />
       </list>
     </option>
@@ -311,7 +318,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527080890162</updated>
-      <workItem from="1527080893010" duration="17768000" />
+      <workItem from="1527080893010" duration="19487000" />
     </task>
     <servers />
   </component>
@@ -321,7 +328,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17768000" />
+    <option name="totallyTimeSpent" value="19487000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -392,9 +399,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -410,12 +414,6 @@
     <entry file="file://$PROJECT_DIR$/public/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/logo.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/registerServiceWorker.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -427,16 +425,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -467,10 +455,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.css">
+    <entry file="file://$PROJECT_DIR$/src/components/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="73" column="30" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+        <state relative-caret-position="272">
+          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -486,28 +477,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Board.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        <state relative-caret-position="238">
+          <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Game.js">
+    <entry file="file://$PROJECT_DIR$/src/registerServiceWorker.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/logo.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        <state relative-caret-position="729">
+          <caret line="73" column="30" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="8" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+        <state relative-caret-position="508">
+          <caret line="55" column="21" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
