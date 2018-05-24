@@ -6,6 +6,7 @@ function generateShips(size) {
   let toGenerate = true;
   let shipCoordinates = {};
   while (toGenerate) {
+    // pick random starting point
     const xStart = Math.floor((Math.random() * (size - 1)));
     const yStart = Math.floor((Math.random() * (size - 1)));
     const randIndex = Math.floor(Math.random() * (directionArray.length));
@@ -27,8 +28,7 @@ function generateShips(size) {
       for (let i = 0; i < 3; i++) {
         // if there is ship there, break and check next
         // else record it
-        if (shipCoordinates[coord] ||
-          testArray[axis] > size - 1 || testArray[axis] < 0) {
+        if (isOccupied(shipCoordinates, testArray, axis, size)) {
           break;
         } else {
           testCoords[`(${testArray[0]},${testArray[1]})`] = true;
@@ -48,8 +48,7 @@ function generateShips(size) {
         testArray[1] += randomDirection;
         newAxis = 1;
       }
-      if (shipCoordinates[`(${testArray[0]},${testArray[1]}`] ||
-        testArray[newAxis] > size - 1 || testArray[newAxis] < 0) {
+      if (isOccupied(shipCoordinates, testArray, axis, size)){
         break;
       } else {
         testCoords[`(${testArray[0]},${testArray[1]})`] = true;
@@ -63,8 +62,12 @@ function generateShips(size) {
   }
   return shipCoordinates;
 }
-//
-// let res = generateShips(8);
-// console.log(res);
+
+// check if space is occupied by ship or coords is out of bounds
+function isOccupied(coordsMap, testCoords, axis, size) {
+  return  (coordsMap[`(${testCoords[0]},${testCoords[1]}`] ||
+    testCoords[0] > size - 1 || testCoords[0] < 0 ||
+    testCoords[1] > size - 1 || testCoords[1] < 0)
+}
 
 export default generateShips;
