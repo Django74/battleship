@@ -9,8 +9,11 @@ class Square extends Component {
   render() {
     const buttonClass = {'square': true, 'ship': this.props.isShip};
     return (
-      <button className={classNames(buttonClass)} onClick={() => {
-      }}></button>
+      <button
+        className={classNames(buttonClass)}
+        onClick={() => {
+        }}
+      />
     );
   }
 }

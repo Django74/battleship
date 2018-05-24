@@ -2,72 +2,133 @@
 // [positive/negative, x/y]
 const directionArray = [[1, 0], [-1, 0], [1, 1], [-1, 1]];
 
+const shipsToFind = ['L', 'B1', 'B2', 'S'];
+
+/**
+ * Returns an object containing coordinates (x,y) key pairs of the 4 ships
+ * randomly chosen, random orientation
+ * @param size of board
+ */
 function generateShips(size) {
-  let toGenerate = true;
   let shipCoordinates = {};
-  while (toGenerate) {
-    // pick random starting point
-    const xStart = Math.floor((Math.random() * (size - 1)));
-    const yStart = Math.floor((Math.random() * (size - 1)));
-    const randIndex = Math.floor(Math.random() * (directionArray.length));
-
-    let found = false;
-    while (!found) {
-      let xTest = xStart;
-      let yTest = yStart;
-      let coord = `(${xTest},${yTest})`; // (x,y) format
-
-      let testArray = [xTest, yTest];
-
-      // L ship
-      let direction = directionArray[randIndex][0];
-      let axis = directionArray[randIndex][1];
+  let found = false;
+  for (let i = 0; i < shipsToFind.length; i++) {
+    let toGenerate = true;
+    while (toGenerate) {
+      // pick random starting point
+      const xStart = random(size - 1);
+      const yStart = random(size - 1);
+      const randIndex = random(directionArray.length);
 
       let testCoords = {};
 
-      for (let i = 0; i < 3; i++) {
-        // if there is ship there, break and check next
-        // else record it
-        if (isOccupied(shipCoordinates, testArray, axis, size)) {
-          break;
-        } else {
-          testCoords[`(${testArray[0]},${testArray[1]})`] = true;
-          if (i + 1 !== 3) testArray[axis] += direction;
+      if (shipsToFind[i] === 'L' && !found) {
+        if (generateLShip(xStart, yStart, shipCoordinates, testCoords, randIndex, size)) {
+          found = true;
         }
       }
-      // add protuding piece of L
-      const rand = Math.round(Math.random());
-      const randomDirection = rand ? direction * -1 : direction;
-      // if horizontal piece, add in vertical direction and vice-versa
-      let newAxis;
-      if (axis) {
-        testArray[0] += randomDirection;
-        newAxis = 0;
+
+      if (shipsToFind[i] === 'B1' && !found) {
+        if (generateSquareBlockShip(xStart, yStart, shipCoordinates, testCoords, randIndex, size)) {
+          found = true;
+        }
       }
-      else {
-        testArray[1] += randomDirection;
-        newAxis = 1;
+
+      if (shipsToFind[i] === 'B2' && !found) {
+        if (generateSquareBlockShip(xStart, yStart, shipCoordinates, testCoords, randIndex, size)) {
+          found = true;
+        }
       }
-      if (isOccupied(shipCoordinates, testArray, axis, size)){
-        break;
-      } else {
-        testCoords[`(${testArray[0]},${testArray[1]})`] = true;
-        found = true;
+
+      if (shipsToFind[i] === 'S' && !found) {
+        if (generateStraightShip(xStart, yStart, shipCoordinates, testCoords, randIndex, size)) {
+          found = true;
+        }
       }
+
       if (found) {
         Object.assign(shipCoordinates, testCoords);
         toGenerate = false;
+        found = false;
       }
     }
   }
   return shipCoordinates;
 }
 
-// check if space is occupied by ship or coords is out of bounds
-function isOccupied(coordsMap, testCoords, axis, size) {
-  return  (coordsMap[`(${testCoords[0]},${testCoords[1]}`] ||
-    testCoords[0] > size - 1 || testCoords[0] < 0 ||
-    testCoords[1] > size - 1 || testCoords[1] < 0)
+function generateLShip(xTest, yTest, shipCoordinates, testCoords, randIndex, size) {
+    let testArray = [xTest, yTest];
+
+    let direction = directionArray[randIndex][0];
+    let axis = directionArray[randIndex][1];
+
+    for (let j = 0; j < 3; j++) {
+      // if there is ship there return false
+      // else record it
+      if (isInvalidCoord(shipCoordinates, testArray, size)) {
+        return false;
+      } else {
+        testCoords[`(${testArray[0]},${testArray[1]})`] = true;
+        if (j + 1 !== 3) {
+          testArray[axis] += direction;
+        }
+      }
+    }
+    // add protuding piece of L
+    const rand = Math.round(Math.random());
+    const randomDirection = rand ? direction * -1 : direction;
+    // if horizontal piece, add in vertical direction and vice-versa
+    if (axis) {
+      testArray[0] += randomDirection;
+    }
+    else {
+      testArray[1] += randomDirection;
+    }
+    if (isInvalidCoord(shipCoordinates, testArray, size)) {
+      return false;
+    } else {
+      testCoords[`(${testArray[0]},${testArray[1]})`] = true;
+    }
+    return true;
+}
+
+function generateSquareBlockShip(xTest, yTest, shipCoordinates, testCoords, randIndex, size) {
+  return true;
+}
+
+function generateStraightShip(xTest, yTest, shipCoordinates, testCoords, randIndex, size) {
+  let testArray = [xTest, yTest];
+
+  let direction = directionArray[randIndex][0];
+  let axis = directionArray[randIndex][1];
+
+  for (let j = 0; j < 4; j++) {
+    // if there is ship there return false
+    // else record it
+    if (isInvalidCoord(shipCoordinates, testArray, size)) {
+      return false;
+    } else {
+      testCoords[`(${testArray[0]},${testArray[1]})`] = true;
+      if (j + 1 !== 4) {
+        testArray[axis] += direction;
+      }
+    }
+  }
+
+  return true;
+}
+
+/**
+ * check if coord is occupied by ship or out of bounds
+ */
+function isInvalidCoord(coordsMap, testArray, size) {
+  return (coordsMap[`(${testArray[0]},${testArray[1]})`] ||
+    testArray[0] > size - 1 || testArray[0] < 0 ||
+    testArray[1] > size - 1 || testArray[1] < 0);
+}
+
+function random(endNumber) {
+  return Math.floor(Math.random() * (endNumber));
 }
 
 export default generateShips;
