@@ -93,6 +93,41 @@ function generateLShip(xTest, yTest, shipCoordinates, testCoords, randIndex, siz
 }
 
 function generateSquareBlockShip(xTest, yTest, shipCoordinates, testCoords, randIndex, size) {
+  let testArrayLevelOne = [xTest, yTest];
+  let testArrayLevelTwo = [xTest, yTest];
+
+  let direction = directionArray[randIndex][0];
+  let axis = directionArray[randIndex][1];
+
+  // Increase second half of block
+  if (axis) {
+    testArrayLevelTwo[0] += direction;
+  }
+  else {
+    testArrayLevelTwo[1] += direction;
+  }
+
+  for (let j = 0; j < 2; j++) {
+    // if there is ship there return false
+    // else record it
+    if (isInvalidCoord(shipCoordinates, testArrayLevelOne, size)) {
+      return false;
+    } else {
+      testCoords[`(${testArrayLevelOne[0]},${testArrayLevelOne[1]})`] = true;
+      if (j + 1 !== 2) {
+        testArrayLevelOne[axis] += direction;
+      }
+    }
+
+    if (isInvalidCoord(shipCoordinates, testArrayLevelTwo, size)) {
+      return false;
+    } else {
+      testCoords[`(${testArrayLevelTwo[0]},${testArrayLevelTwo[1]})`] = true;
+      if (j + 1 !== 2) {
+        testArrayLevelTwo[axis] += direction;
+      }
+    }
+  }
   return true;
 }
 
@@ -114,7 +149,6 @@ function generateStraightShip(xTest, yTest, shipCoordinates, testCoords, randInd
       }
     }
   }
-
   return true;
 }
 
