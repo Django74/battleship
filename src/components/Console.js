@@ -12,9 +12,9 @@ class Console extends Component {
       <div>
         <h1>Your info</h1>
         <h3>Ships Sunk:</h3>
-        <button onClick={() => {this.props.changeTurn()}}>Next Turn</button>
-        <button>Start</button>
-        <button>Reset</button>
+        <button style={{margin: 10}} onClick={() => {this.props.changeTurn()}}>Next Turn</button>
+        <button style={{margin: 10}} onClick={() => {this.props.start()}} disabled={this.props.started}> Start</button>
+        <button style={{margin: 10}} disabled={false}>Reset</button>
       </div>
     );
   }

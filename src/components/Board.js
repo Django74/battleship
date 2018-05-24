@@ -34,6 +34,7 @@ class Board extends Component {
                           playerMisses={this.props.playerMisses}
                           hitAlready={this.props.hitAlready}
                           turn={this.props.turn}
+                          started={this.state.started}
         />);
       }
     }

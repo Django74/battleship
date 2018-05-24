@@ -11,8 +11,9 @@ class Game extends Component {
 
     }
     this.state={
+      started: false,
       turn: 0,
-      ships: [generateShips(this.size), generateShips(this.size)],
+      ships: [{}, {}],
       playersHealth: [16,16],
       playersShipHit: [{},{}],
       playerMisses: [{}, {}],
@@ -21,6 +22,7 @@ class Game extends Component {
 
     this.changeTurn = this.changeTurn.bind(this);
     this.handleAttack = this.handleAttack.bind(this);
+    this.start = this.start.bind(this);
   }
 
   componentDidUpdate() {
@@ -74,6 +76,18 @@ class Game extends Component {
     return newTurn;
   }
 
+  start() {
+    this.setState({
+      turn: 0,
+      ships: [generateShips(this.size), generateShips(this.size)],
+      playersHealth: [16,16],
+      playersShipHit: [{},{}],
+      playerMisses: [{}, {}],
+      hitAlready: false,
+      started: true,
+    })
+  }
+
   render() {
     return (
       <div className="game-dashboard">
@@ -98,6 +112,8 @@ class Game extends Component {
         />
         <Console
           changeTurn={this.changeTurn}
+          start={this.start}
+          started={this.state.started}
         />
       </div>
     );
