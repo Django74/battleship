@@ -28,7 +28,11 @@ class Board extends Component {
                           handleAttack={this.props.handleAttack}
                           ships={this.props.ships[this.props.turn]}
                           coord={coord}
+                          xCoord={x}
+                          yCoord={y}
                           playersShipHit={this.props.playersShipHit}
+                          playerMisses={this.props.playerMisses}
+                          hitAlready={this.props.hitAlready}
         />);
       }
     }

@@ -15,6 +15,8 @@ class Game extends Component {
       ships: [generateShips(this.size), generateShips(this.size)],
       playersHealth: [16,16],
       playersShipHit: [{},{}],
+      playerMisses: [{}, {}],
+      hitAlready: false,
     };
 
     this.changeTurn = this.changeTurn.bind(this);
@@ -23,25 +25,40 @@ class Game extends Component {
 
   changeTurn() {
     if(window.confirm("Are you sure you want to change turns?")) {
-      this.setState({turn: this.getOppositeTurn()});
+      this.setState({
+        turn: this.getOppositeTurn(),
+        hitAlready: false,
+      });
     }
   }
 
   handleAttack(coord) {
+    let newHealth = this.state.playersHealth;
+    let newHits = this.state.playersShipHit;
+    let newMisses = this.state.playerMisses;
+
+    // if hit decrease health and update accordingly
+    // else miss
     if (this.state.ships[this.getOppositeTurn()][coord]) {
       // update health
-      let newHealth = [...this.state.playersHealth];
+      newHealth = [...this.state.playersHealth];
       newHealth[this.getOppositeTurn()]--;
 
-      //update tracked ships
+      // update tracked ships
       let newHits = [...this.state.playersShipHit];
       newHits[this.getOppositeTurn()][coord] = true;
-
-      this.setState({
-        playersHealth: newHealth,
-        playersShipHit: newHits,
-      })
+    } else {
+      //update missed ships
+      let newMisses = [...this.state.playerMisses];
+      newMisses[this.getOppositeTurn()][coord] = true;
     }
+
+    this.setState({
+      playersHealth: newHealth,
+      playersShipHit: newHits,
+      playerMisses: newMisses,
+      hitAlready: true,
+    });
   }
 
   getOppositeTurn() {
@@ -72,7 +89,9 @@ class Game extends Component {
                turn={this.state.turn}
                type="opponent"
                playersShipHit={this.state.playersShipHit}
+               playerMisses={this.state.playerMisses}
                handleAttack={this.handleAttack}
+               hitAlready={this.state.hitAlready}
         />
         <Console
           changeTurn={this.changeTurn}
