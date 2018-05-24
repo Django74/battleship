@@ -5,8 +5,15 @@ import PropTypes from 'prop-types';
 class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.ships = this.props.type === 'player' ? this.props.ships[this.props.turn] : {};
+    this.state = {
+    };
+    // this.ships = this.props.type === 'player' ? this.props.ships[this.props.turn] : {};
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.turn !== this.props.turn) {
+
+    }
   }
 
   renderGrid() {
@@ -16,13 +23,14 @@ class Board extends Component {
       grid.push(<div key={`row${x}`} className="board-row"/>);
       for (let y = 0; y < size; y++) {
         const coord = `(${x},${y})`;
-        const isShip = !!this.ships[coord];
         grid.push(<Square key={coord}
-                          isShip={isShip}
                           xCoord={x}
                           yCoord={y}
                           type={this.props.type}
-                  />);
+                          handleAttack={this.handleAttack}
+                          ships={this.props.ships[this.props.turn]}
+                          coord={coord}
+        />);
       }
     }
     return grid;
@@ -32,7 +40,7 @@ class Board extends Component {
     const grid = this.renderGrid();
     return (
       <div>
-        <h1>{this.props.isPlayer ? `Player: ${this.props.turn}` : 'Opponent'}</h1>
+        <h1>{this.props.isPlayer ? `Player: ${this.props.turn + 1}` : 'Opponent'}</h1>
         {grid}
       </div>
     );
@@ -43,7 +51,7 @@ Board.propTypes = {
   size: PropTypes.number,
   turn: PropTypes.number,
   isPlayer: PropTypes.bool,
-  ships: PropTypes.object,
+  ships: PropTypes.array,
   type: PropTypes.string,
 };
 

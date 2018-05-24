@@ -11,21 +11,36 @@ class Game extends Component {
 
     }
     this.state={
-      turn: 1,
+      turn: 0,
       ships: [generateShips(this.size), generateShips(this.size)],
+      playerOneHp: 16,
+      playerTwoHp: 16,
     };
 
     this.changeTurn = this.changeTurn.bind(this);
+    this.handleAttack = this.handleAttack.bind(this);
   }
 
   changeTurn() {
-    let newTurn=this.state.turn;
-    if (this.state.turn === 1) {
+    this.setState({turn: this.getOppositeTurn()});
+  }
+
+  handleAttack(x, y) {
+    const coord = `(${x},${y})`;
+    if (this.ships[this.getOppositeTurn()][coord]) {
+      console.log(x);
+      console.log(y);
+    }
+  }
+
+  getOppositeTurn() {
+    let newTurn = this.state.turn;
+    if (this.state.turn === 0) {
       newTurn++;
     } else {
       newTurn--;
     }
-    this.setState({turn: newTurn});
+    return newTurn;
   }
 
   render() {
@@ -44,8 +59,11 @@ class Game extends Component {
                ships={this.state.ships}
                turn={this.state.turn}
                type="opponent"
+               handleAttack={this.handleAttack}
         />
-        <Console changeTurn={this.changeTurn}/>
+        <Console
+          changeTurn={this.changeTurn}
+        />
       </div>
     );
 
