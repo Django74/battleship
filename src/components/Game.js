@@ -1,13 +1,31 @@
 import React, {Component} from 'react';
 import Board from './Board';
-import Statistics from './Statistics';
+import Console from './Console';
 import generateShips from './helper';
 
 class Game extends Component {
   constructor(props) {
     super(props);
     this.size = 8;
-    this.ships = generateShips(this.size);
+    if (sessionStorage.getItem('isFirstTime')) {
+
+    }
+    this.state={
+      turn: 1,
+      ships: [generateShips(this.size), generateShips(this.size)],
+    };
+
+    this.changeTurn = this.changeTurn.bind(this);
+  }
+
+  changeTurn() {
+    let newTurn=this.state.turn;
+    if (this.state.turn === 1) {
+      newTurn++;
+    } else {
+      newTurn--;
+    }
+    this.setState({turn: newTurn});
   }
 
   render() {
@@ -16,14 +34,18 @@ class Game extends Component {
         <Board className="player-board"
                size={this.size}
                isPlayer={true}
-               ships={this.ships}
+               ships={this.state.ships}
+               turn={this.state.turn}
+               type="player"
         />
         <Board className="opponent-board"
                size={this.size}
                isPlayer={false}
-               ships={this.ships}
+               ships={this.state.ships}
+               turn={this.state.turn}
+               type="opponent"
         />
-        <Statistics/>
+        <Console changeTurn={this.changeTurn}/>
       </div>
     );
 

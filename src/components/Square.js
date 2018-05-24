@@ -13,6 +13,7 @@ class Square extends Component {
         className={classNames(buttonClass)}
         onClick={() => {
         }}
+        disabled={this.props.type === 'player'}
       />
     );
   }
