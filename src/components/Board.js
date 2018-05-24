@@ -24,12 +24,11 @@ class Board extends Component {
       for (let y = 0; y < size; y++) {
         const coord = `(${x},${y})`;
         grid.push(<Square key={coord}
-                          xCoord={x}
-                          yCoord={y}
                           type={this.props.type}
                           handleAttack={this.props.handleAttack}
                           ships={this.props.ships[this.props.turn]}
                           coord={coord}
+                          playersShipHit={this.props.playersShipHit}
         />);
       }
     }

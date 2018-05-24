@@ -22,13 +22,25 @@ class Game extends Component {
   }
 
   changeTurn() {
-    this.setState({turn: this.getOppositeTurn()});
+    if(window.confirm("Are you sure you want to change turns?")) {
+      this.setState({turn: this.getOppositeTurn()});
+    }
   }
 
-  handleAttack(x, y) {
-    const coord = `(${x},${y})`;
+  handleAttack(coord) {
     if (this.state.ships[this.getOppositeTurn()][coord]) {
-      console.log(`(${x},${y})`);
+      // update health
+      let newHealth = [...this.state.playersHealth];
+      newHealth[this.getOppositeTurn()]--;
+
+      //update tracked ships
+      let newHits = [...this.state.playersShipHit];
+      newHits[this.getOppositeTurn()][coord] = true;
+
+      this.setState({
+        playersHealth: newHealth,
+        playersShipHit: newHits,
+      })
     }
   }
 
@@ -51,6 +63,7 @@ class Game extends Component {
                ships={this.state.ships}
                turn={this.state.turn}
                type="player"
+               playersShipHit={this.state.playersShipHit}
         />
         <Board className="opponent-board"
                size={this.size}
@@ -58,6 +71,7 @@ class Game extends Component {
                ships={this.state.ships}
                turn={this.state.turn}
                type="opponent"
+               playersShipHit={this.state.playersShipHit}
                handleAttack={this.handleAttack}
         />
         <Console

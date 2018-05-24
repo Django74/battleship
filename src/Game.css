@@ -73,3 +73,11 @@ ol, ul {
 .ship {
     background-color: #0c5df5;
 }
+
+.hit {
+    background-color: darkred;
+}
+
+.miss {
+    background-color: #6e6e6e;
+}
