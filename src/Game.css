@@ -69,3 +69,7 @@ ol, ul {
 .square:hover {
     background-color: darkgreen;
 }
+
+.ship {
+    background-color: #0c5df5;
+}

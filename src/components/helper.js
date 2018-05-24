@@ -8,7 +8,7 @@ function generateShips(size) {
   while (toGenerate) {
     const xStart = Math.floor((Math.random() * (size - 1)));
     const yStart = Math.floor((Math.random() * (size - 1)));
-    const randIndex = Math.floor(Math.random() * directionArray.length - 1);
+    const randIndex = Math.floor(Math.random() * (directionArray.length - 1));
 
     let found = false;
     while (!found) {
@@ -31,7 +31,7 @@ function generateShips(size) {
           testArray[axis] > size - 1 || testArray[axis] < 0) {
           break;
         } else {
-          testCoords[`(${testArray[0]},${testArray[1]}`] = true;
+          testCoords[`(${testArray[0]},${testArray[1]})`] = true;
           if (i + 1 !== 3) testArray[axis] += direction;
         }
       }
@@ -60,6 +60,8 @@ function generateShips(size) {
   }
   return shipCoordinates;
 }
+//
+// let res = generateShips(8);
+// console.log(res);
 
-let res = generateShips(8);
-console.log(res);
+export default generateShips;

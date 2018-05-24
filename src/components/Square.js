@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import classNames from 'classnames';
 
 class Square extends Component {
   constructor(props) {
@@ -6,8 +7,9 @@ class Square extends Component {
   }
 
   render() {
+    const buttonClass = {'square': true, 'ship': this.props.isShip};
     return (
-      <button className="square" onClick={() => {
+      <button className={classNames(buttonClass)} onClick={() => {
       }}></button>
     );
   }
