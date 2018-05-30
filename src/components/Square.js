@@ -13,6 +13,7 @@ class Square extends Component {
     let isShip = false;
     let isHit = false;
     let isMiss = false;
+    let isHint = false;
 
     if (this.props.type === 'player') {
       let playerNumber = this.props.turn;
@@ -22,20 +23,23 @@ class Square extends Component {
       let playerNumber = this.props.turn === 0 ? 1 : 0;
       isHit = this.props.playersShipHit[playerNumber][this.coord];
       isMiss = this.props.playerMisses[playerNumber][this.coord];
+      if (!isHit) isHint = this.props.playerHints[playerNumber][this.coord];
     }
-    return [isHit, isMiss, isShip];
+    return [isHit, isMiss, isShip, isHint];
   }
 
   render() {
     let isHit;
     let isShip;
     let isMiss;
-    [isHit, isMiss, isShip] = this.checkStatus();
+    let isHint;
+    [isHit, isMiss, isShip, isHint] = this.checkStatus();
     const buttonClass = {
       'square': true,
       'ship': isShip,
       'hit': isHit,
       'miss': isMiss,
+      'hint': isHint,
     };
 
     return (
@@ -43,7 +47,7 @@ class Square extends Component {
         className={classNames(buttonClass)}
         onClick={() => {
           if (this.props.handleAttack) {
-            this.props.handleAttack(this.coord);
+            this.props.handleAttack(this.coord, this.xCoord, this.yCoord);
           }
         }}
         disabled={this.props.type === 'player' || this.props.hitAlready}

@@ -165,4 +165,4 @@ function random(endNumber) {
   return Math.floor(Math.random() * (endNumber));
 }
 
-export default generateShips;
+export {generateShips, isInvalidCoord};

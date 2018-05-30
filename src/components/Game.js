@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Board from './Board';
 import Console from './Console';
-import generateShips from './helper';
+import {generateShips, isInvalidCoord} from './helper';
 
 class Game extends Component {
   constructor(props) {
@@ -10,13 +10,14 @@ class Game extends Component {
     if (sessionStorage.getItem('isFirstTime')) {
 
     }
-    this.state={
+    this.state = {
       started: false,
       turn: 0,
       ships: [{}, {}],
-      playersHealth: [16,16],
-      playersShipHit: [{},{}],
+      playersHealth: [16, 16],
+      playersShipHit: [{}, {}],
       playerMisses: [{}, {}],
+      playerHints: [{}, {}],
       hitAlready: false,
     };
 
@@ -32,7 +33,7 @@ class Game extends Component {
   }
 
   changeTurn() {
-    if(window.confirm("Are you sure you want to change turns?")) {
+    if (window.confirm("Are you sure you want to change turns?")) {
       this.setState({
         turn: this.getOppositeTurn(),
         hitAlready: false,
@@ -40,22 +41,26 @@ class Game extends Component {
     }
   }
 
-  handleAttack(coord) {
+  handleAttack(coord, xCoord, yCoord) {
     let newHealth = [...this.state.playersHealth];
     let newHits = [...this.state.playersShipHit];
     let newMisses = [...this.state.playerMisses];
+    let currentTurn = this.getOppositeTurn();
 
     // if hit decrease health and update accordingly
     // else miss
-    if (this.state.ships[this.getOppositeTurn()][coord]) {
+    if (this.state.ships[currentTurn][coord]) {
       // update health
-      newHealth[this.getOppositeTurn()]--;
+      newHealth[currentTurn]--;
 
       // update tracked ships
-      newHits[this.getOppositeTurn()][coord] = true;
+      newHits[currentTurn][coord] = true;
     } else {
       //update missed ships
       newMisses[this.getOppositeTurn()][coord] = true;
+
+      // update ship hints
+      this.updateHints(currentTurn, coord, xCoord, yCoord);
     }
 
     this.setState({
@@ -64,6 +69,40 @@ class Game extends Component {
       playerMisses: newMisses,
       hitAlready: true,
     });
+  }
+
+  updateHints(turn, coord, xCoord, yCoord) {
+    // initialize map
+    let testMap = {};
+
+    // iterate through adjacent squares and if is hint, mark in map
+    // for both rows in adjacent x axis
+    let currentYPoint = yCoord - 1;
+    let xForward = xCoord + 1;
+    let xBackward = xCoord - 1;
+    for (let i = 0; i < 3; i++) {
+      let forwardCoord = `(${xForward},${currentYPoint + i})`;
+      if (this.state.ships[turn][forwardCoord]) {
+        testMap[forwardCoord] = true;
+      }
+
+      let backwardCoord = `(${xBackward},${currentYPoint + i})`;
+      if (this.state.ships[turn][backwardCoord]) {
+        testMap[backwardCoord] = true;
+      }
+    }
+    // for remaining squares
+    for (let i = 0; i < 3; i+= 2) {
+      let adjacentCoord = `(${xCoord},${currentYPoint + i})`;
+      if (this.state.ships[turn][adjacentCoord]) {
+        testMap[adjacentCoord] = true;
+      }
+    }
+
+    // update state
+    let newHints = [...this.state.playerHints];
+    newHints[turn] = Object.assign(this.state.playerHints[turn], testMap);
+    this.setState({playerHints: newHints});
   }
 
   getOppositeTurn() {
@@ -80,8 +119,8 @@ class Game extends Component {
     this.setState({
       turn: 0,
       ships: [generateShips(this.size), generateShips(this.size)],
-      playersHealth: [16,16],
-      playersShipHit: [{},{}],
+      playersHealth: [16, 16],
+      playersShipHit: [{}, {}],
       playerMisses: [{}, {}],
       hitAlready: false,
       started: true,
@@ -109,6 +148,7 @@ class Game extends Component {
                playerMisses={this.state.playerMisses}
                handleAttack={this.handleAttack}
                hitAlready={this.state.hitAlready}
+               playerHints={this.state.playerHints}
         />
         <Console
           changeTurn={this.changeTurn}

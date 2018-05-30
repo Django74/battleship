@@ -32,6 +32,7 @@ class Board extends Component {
                           yCoord={y}
                           playersShipHit={this.props.playersShipHit}
                           playerMisses={this.props.playerMisses}
+                          playerHints={this.props.playerHints}
                           hitAlready={this.props.hitAlready}
                           turn={this.props.turn}
                           started={this.state.started}

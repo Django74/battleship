@@ -81,3 +81,7 @@ ol, ul {
 .miss {
     background-color: #6e6e6e;
 }
+
+.hint {
+    background-color: #f5b40b;
+}
